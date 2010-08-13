@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PublicSuffix", "PublicSuffix\PublicSuffix.csproj", "{662A401D-75B5-4B41-8D82-D77BEF799267}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PublicSuffix.Specs", "..\specs\PublicSuffix.Specs\PublicSuffix.Specs.csproj", "{669D052D-8827-4AF1-AED5-969A2CB301D4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{662A401D-75B5-4B41-8D82-D77BEF799267}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{662A401D-75B5-4B41-8D82-D77BEF799267}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{662A401D-75B5-4B41-8D82-D77BEF799267}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{662A401D-75B5-4B41-8D82-D77BEF799267}.Release|Any CPU.Build.0 = Release|Any CPU
+		{669D052D-8827-4AF1-AED5-969A2CB301D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{669D052D-8827-4AF1-AED5-969A2CB301D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{669D052D-8827-4AF1-AED5-969A2CB301D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{669D052D-8827-4AF1-AED5-969A2CB301D4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
