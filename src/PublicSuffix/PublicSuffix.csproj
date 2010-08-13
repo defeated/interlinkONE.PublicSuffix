@@ -35,10 +35,15 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RuleFactory.cs" />
     <Compile Include="Parser.cs" />
     <Compile Include="Domain.cs" />
     <Compile Include="RulesList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="rules\ExceptionRule.cs" />
+    <Compile Include="rules\Rule.cs" />
+    <Compile Include="rules\WildcardRule.cs" />
+    <Compile Include="rules\NormalRule.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="data\effective_tld_names.dat">

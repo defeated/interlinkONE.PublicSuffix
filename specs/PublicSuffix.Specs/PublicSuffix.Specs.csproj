@@ -38,6 +38,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RuleFactorySpecs.cs" />
     <Compile Include="DomainSpecs.cs" />
     <Compile Include="RulesListSpecs.cs" />
     <Compile Include="ParserSpecs.cs" />

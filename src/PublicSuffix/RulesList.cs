@@ -3,6 +3,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
+using PublicSuffix.Rules;
+
 namespace PublicSuffix {
 
     public class RulesList {
@@ -18,10 +20,10 @@ namespace PublicSuffix {
         /// <remarks>See http://mxr.mozilla.org/mozilla-central/source/netwerk/dns/effective_tld_names.dat?raw=1 for the latest file.</remarks>
         /// <param name="file">The file containing a list of rules.</param>
         /// <returns>A string array of rules.</returns>
-        public string[] FromFile(string file) {
+        public Rule[] FromFile(string file) {
             var lines = (from line in File.ReadAllLines(file, Encoding.UTF8)
                          where this.IsValidRule(line)
-                         select line.ToLowerInvariant()).ToArray();
+                         select RuleFactory.Get(line)).ToArray();
 
             return lines;
         }
