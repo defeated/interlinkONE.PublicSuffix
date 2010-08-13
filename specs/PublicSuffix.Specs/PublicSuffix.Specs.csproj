@@ -38,7 +38,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DomainNameSpecs.cs" />
+    <Compile Include="DomainSpecs.cs" />
     <Compile Include="RulesListSpecs.cs" />
     <Compile Include="ParserSpecs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
