@@ -3,10 +3,13 @@ using Machine.Specifications;
 
 namespace PublicSuffix.Specs {
 
-    [Subject(typeof(Domain))]
-    public class when_given_a_tld {
-        static Domain domain;
+    public abstract class WithDomain {
+        protected static Domain domain;
+        protected static string[] parts;
+    }
 
+    [Subject(typeof(Domain))]
+    public class when_given_a_tld : WithDomain {
         Establish context = () => domain = new Domain("com");
 
         It has_a_tld            = () => domain.TLD.ShouldEqual("com");
@@ -14,9 +17,7 @@ namespace PublicSuffix.Specs {
     }
 
     [Subject(typeof(Domain))]
-    public class when_given_a_maindomain {
-        static Domain domain;
-
+    public class when_given_a_maindomain : WithDomain {
         Establish context = () => domain = new Domain("com", "google");
 
         It has_a_tld            = () => domain.TLD.ShouldEqual("com");
@@ -25,9 +26,7 @@ namespace PublicSuffix.Specs {
     }
 
     [Subject(typeof(Domain))]
-    public class when_given_a_subdomain {
-        static Domain domain;
-
+    public class when_given_a_subdomain : WithDomain {
         Establish context = () => domain = new Domain("com", "google", "maps");
 
         It has_a_tld            = () => domain.TLD.ShouldEqual("com");
@@ -37,10 +36,7 @@ namespace PublicSuffix.Specs {
     }
 
     [Subject(typeof(Domain))]
-    public class when_subdomain_converts_to_array {
-        static Domain domain;
-        static string[] parts;
-
+    public class when_subdomain_converts_to_array : WithDomain {
         Establish context = () => domain = new Domain("com", "google", "maps");
         
         Because of = () => parts = domain.ToArray();
@@ -52,10 +48,7 @@ namespace PublicSuffix.Specs {
     }
 
     [Subject(typeof(Domain))]
-    public class when_domain_converts_to_array {
-        static Domain domain;
-        static string[] parts;
-
+    public class when_domain_converts_to_array : WithDomain {
         Establish context = () => domain = new Domain("com", "google");
 
         Because of = () => parts = domain.ToArray();
@@ -66,10 +59,7 @@ namespace PublicSuffix.Specs {
     }
 
     [Subject(typeof(Domain))]
-    public class when_tld_converts_to_array {
-        static Domain domain;
-        static string[] parts;
-
+    public class when_tld_converts_to_array : WithDomain {
         Establish context = () => domain = new Domain("com");
 
         Because of = () => parts = domain.ToArray();
