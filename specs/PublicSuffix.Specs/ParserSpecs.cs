@@ -3,20 +3,30 @@ using Machine.Specifications;
 
 namespace PublicSuffix.Specs {
 
-    [Subject("Parser")]
-    public class when_given_a_url {
-
-        static string url;
+    public abstract class WithParser : WithDomain {
+        protected static Parser parser;
 
         Establish context = () => {
-            url = "maps.google.com";
+            var list = new RulesList();
+            var rules = list.FromFile(@"data\effective_tld_names.dat");
+            parser = new Parser(rules);
         };
+    }
 
-        It parses_the_tld;
-        It parses_the_domain;
-        It parses_the_subdomain;
-        It validates_the_tld;
-        
+    [Subject("Parser")]
+    public class when_given_a_valid_url : WithParser {
+        Establish context = () => domain = parser.Parse("google.com");
+
+        It parses_the_tld = () => domain.TLD.ShouldEqual("com");
+        It validates_the_tld = () => domain.IsValid.ShouldBeTrue();
+    }
+
+    [Subject("Parser")]
+    public class when_given_an_invalid_url : WithParser {
+        Establish context = () => domain = parser.Parse("fake.zzz");
+
+        It parses_the_tld = () => domain.TLD.ShouldEqual("zzz");
+        It validates_the_tld = () => domain.IsValid.ShouldBeFalse();
     }
 
 }

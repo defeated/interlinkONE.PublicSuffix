@@ -8,6 +8,7 @@ namespace PublicSuffix {
         public string TLD { get; set; }
         public string MainDomain { get; set; }
         public string SubDomain { get; set; }
+        public bool IsValid { get; set; }
 
         public Domain() : this("") {}
         public Domain(string tld) : this(tld, "") {}
@@ -17,6 +18,7 @@ namespace PublicSuffix {
             this.TLD        = parts[0] ?? "";
             this.MainDomain = parts[1] ?? "";
             this.SubDomain  = parts[2] ?? "";
+            this.IsValid    = false;
         }
 
         public override string ToString() {
