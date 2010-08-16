@@ -3,6 +3,7 @@ using Machine.Specifications;
 
 namespace PublicSuffix.Specs {
 
+    [Subject("Parser")]
     public class when_given_a_url {
 
         static string url;

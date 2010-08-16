@@ -3,6 +3,7 @@ using Machine.Specifications;
 
 namespace PublicSuffix.Specs {
 
+    [Subject(typeof(Domain))]
     public class when_given_a_tld {
         static Domain domain;
 
@@ -12,6 +13,7 @@ namespace PublicSuffix.Specs {
         It converts_to_a_string = () => domain.ToString().ShouldEqual("com");
     }
 
+    [Subject(typeof(Domain))]
     public class when_given_a_maindomain {
         static Domain domain;
 
@@ -22,6 +24,7 @@ namespace PublicSuffix.Specs {
         It converts_to_a_string = () => domain.ToString().ShouldEqual("google.com");
     }
 
+    [Subject(typeof(Domain))]
     public class when_given_a_subdomain {
         static Domain domain;
 
@@ -33,6 +36,7 @@ namespace PublicSuffix.Specs {
         It converts_to_a_string = () => domain.ToString().ShouldEqual("maps.google.com");
     }
 
+    [Subject(typeof(Domain))]
     public class when_subdomain_converts_to_array {
         static Domain domain;
         static string[] parts;
@@ -47,6 +51,7 @@ namespace PublicSuffix.Specs {
         It has_a_tld            = () => parts[2].ShouldEqual("com");
     }
 
+    [Subject(typeof(Domain))]
     public class when_domain_converts_to_array {
         static Domain domain;
         static string[] parts;
@@ -60,6 +65,7 @@ namespace PublicSuffix.Specs {
         It has_a_tld            = () => parts[1].ShouldEqual("com");
     }
 
+    [Subject(typeof(Domain))]
     public class when_tld_converts_to_array {
         static Domain domain;
         static string[] parts;

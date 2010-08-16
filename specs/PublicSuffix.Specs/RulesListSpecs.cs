@@ -7,6 +7,7 @@ using Machine.Specifications;
 
 namespace PublicSuffix.Specs {
 
+    [Subject(typeof(RulesList))]
     public class when_rules_come_from_text_file {
         static RulesList list;
         static Rule[] rules;
