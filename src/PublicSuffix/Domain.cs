@@ -1,10 +1,13 @@
 ﻿
 using System.Linq;
 
+using PublicSuffix.Rules;
+
 namespace PublicSuffix {
 
     public class Domain {
 
+        public Rule Rule { get; set; }
         public string TLD { get; set; }
         public string MainDomain { get; set; }
         public string SubDomain { get; set; }

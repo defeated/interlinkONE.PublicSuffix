@@ -2,7 +2,7 @@
 namespace PublicSuffix.Rules {
 
     public class NormalRule : Rule {
-        public NormalRule(string name) : base(name) {
+        public NormalRule(string value) : base(value) {
         }
     }
 }
