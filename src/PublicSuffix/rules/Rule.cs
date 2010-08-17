@@ -1,30 +1,32 @@
 ﻿
+using System.Collections.Generic;
+using System.Linq;
+
 namespace PublicSuffix.Rules {
 
     public abstract class Rule {
         public string Name { get; set; }
         public string Value { get; set; }
-        public string Pattern { get; set; }
-        public string[] Parts { get; protected set; }
 
-        public Rule(string value) : this(value, value) {
+        public Rule(string name) {
+            this.Name   = name.ToLowerInvariant();
+            this.Value  = this.Name;
         }
 
-        public Rule(string value, string name) {
-            this.Value      = (value ?? "").Trim().ToLowerInvariant();
-            this.Name       = name;
-            this.Pattern    = @"^(.*)\.({0})$";
-            this.Parts      = this.Name.Split('.');
-        }
-
-        public virtual int Length {
+        public IEnumerable<string> Parts {
             get {
-                return this.Parts.Length;
+                return this.Name.Split('.').Reverse();
+            }
+        }
+
+        public int Length {
+            get {
+                return this.Parts.Count();
             }
         }
 
         public override string ToString() {
-            return this.Value;
+            return this.Name;
         }
     }
 }

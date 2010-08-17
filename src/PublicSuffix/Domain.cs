@@ -18,9 +18,9 @@ namespace PublicSuffix {
         public Domain(string tld, string mainDomain) : this(tld, mainDomain, "") {}
 
         public Domain(params string[] parts) {
-            this.TLD        = parts[0] ?? "";
-            this.MainDomain = parts[1] ?? "";
-            this.SubDomain  = parts[2] ?? "";
+            this.TLD        = parts[0];
+            this.MainDomain = parts[1];
+            this.SubDomain  = parts[2];
             this.IsValid    = false;
         }
 

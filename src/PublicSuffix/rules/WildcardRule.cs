@@ -2,14 +2,8 @@
 namespace PublicSuffix.Rules {
 
     public class WildcardRule : Rule {
-        public WildcardRule(string value) : base(value) {
-            this.Pattern = @"^(.*)\.(.*?\.{0})$";
+        public WildcardRule(string name)
+            : base(name) {
         }
-
-        //public override int Length {
-        //    get {
-        //        return base.Length + 1;
-        //    }
-        //}
     }
 }

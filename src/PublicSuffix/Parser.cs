@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 
 using PublicSuffix.Rules;
 
@@ -16,34 +15,47 @@ namespace PublicSuffix {
         }
 
         public Domain Parse(string url) {
-            var uri = new Uri(url);
-            var matches = new List<Domain>();
+            var uri     = new Uri(url);
+            var host    = uri.DnsSafeHost.Split('.').Reverse().ToArray();
+            var matches = new List<Rule>();
 
-            foreach(Rule rule in this.Rules) {
-                var pattern = string.Format(rule.Pattern, rule.Name.Replace(".", @"\."));
-                var rx = new Regex(pattern, RegexOptions.IgnoreCase);
+            foreach(var rule in this.Rules) {
+                var parts   = rule.Parts.ToArray();
+                var max     = rule.Length;
+                var hosts   = host.Count();
 
-                if(!rx.IsMatch(uri.DnsSafeHost)) continue;
-
-                var groups = rx.Match(uri.DnsSafeHost).Groups;
-                var stack = new Stack<string>(groups[1].Value.Split('.'));
-
-                matches.Add(new Domain() {
-                    IsValid = true,
-                    Rule = rule,
-                    TLD = groups[2].Value,
-                    MainDomain = stack.Pop(),
-                    SubDomain = string.Join(".", stack.Reverse().ToArray())
-                });
+                var match = true;
+                for(var h = 0; h < hosts; h++) {
+                    if(h < max) {
+                        var part = parts[h];
+                        if(part != host[h] && part != "*") match = false;
+                    }
+                }
+                if(match) matches.Add(rule);
             }
 
-            var result = matches.Where(d => d.Rule.GetType() == typeof(ExceptionRule)).FirstOrDefault()
-                        ??
-                        matches.OrderByDescending(d => d.Rule.Length).FirstOrDefault()
-                        ??
-                        new Domain();
+            var result =    matches.Where(rule => rule is ExceptionRule).FirstOrDefault()
+                            ??
+                            matches.OrderByDescending(rule => rule.Length).FirstOrDefault();
 
-            return result;
+            var domain = new Domain();
+            if(result != null) domain.IsValid = true;
+
+            if(result is NormalRule) {
+                domain.TLD = result.Name;
+                domain.MainDomain = host.Skip(result.Length).First();
+                domain.SubDomain = string.Join(".", host.Skip(result.Length + 1).Reverse().ToArray());
+            }
+            if(result is WildcardRule) {
+                domain.TLD = host[result.Length - 1] + "." + string.Join(".", result.Parts.Where(part => part != "*").Reverse().ToArray());
+            }
+            if(result is ExceptionRule) {
+                domain.TLD          = string.Join(".", result.Parts.Reverse().Skip(1).ToArray());
+                domain.MainDomain   = result.Parts.Last();
+                domain.SubDomain    = string.Join(".", host.Skip(result.Length).ToArray());
+            }
+
+            return domain;
         }
     }
 
