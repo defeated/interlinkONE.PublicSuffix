@@ -9,10 +9,9 @@ namespace PublicSuffix {
 
     /// <summary>
     /// From: http://publicsuffix.org/format/
-    /// <list type="bullet">
-    /// <item><description>The Public Suffix List consists of a series of lines, separated by \n.</description></item>
-    /// <item><description>Each line is only read up to the first whitespace; entire lines can also be commented using //.</description></item>
-    /// <item><description>Each line which is not entirely whitespace or begins with a comment contains a rule.</description></item>
+    /// - The Public Suffix List consists of a series of lines, separated by \n.
+    /// - Each line is only read up to the first whitespace; entire lines can also be commented using //.
+    /// - Each line which is not entirely whitespace or begins with a comment contains a rule.
     /// </list>
     /// See http://mxr.mozilla.org/mozilla-central/source/netwerk/dns/effective_tld_names.dat?raw=1 for the latest file.
     /// </summary>
