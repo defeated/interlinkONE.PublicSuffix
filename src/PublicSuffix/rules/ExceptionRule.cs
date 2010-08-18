@@ -4,6 +4,7 @@ using System.Linq;
 namespace PublicSuffix.Rules {
 
     public class ExceptionRule : Rule {
+        public new static string Indicator { get { return "!"; } }
 
         public ExceptionRule(string name) : base(name) {
             this.Name = this.Name.Substring(1); // strip "!" character

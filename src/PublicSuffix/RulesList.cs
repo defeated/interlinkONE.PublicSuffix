@@ -9,6 +9,15 @@ namespace PublicSuffix {
 
     public class RulesList {
 
+        public RuleFactory Factory { get; private set; }
+
+        public RulesList() : this(new RuleFactory()) {
+        }
+
+        public RulesList(RuleFactory factory) {
+            this.Factory = factory;
+        }
+
         /// <summary>
         /// From: http://publicsuffix.org/format/
         /// <list type="bullet">
@@ -23,7 +32,7 @@ namespace PublicSuffix {
         public Rule[] FromFile(string file) {
             var lines = (from line in File.ReadAllLines(file, Encoding.UTF8)
                          where this.IsValidRule(line)
-                         select RuleFactory.Get(line)).ToArray();
+                         select this.Factory.FromLine(line)).ToArray();
 
             return lines;
         }

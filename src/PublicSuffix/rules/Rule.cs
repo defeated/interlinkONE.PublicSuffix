@@ -6,6 +6,8 @@ namespace PublicSuffix.Rules {
 
     public abstract class Rule {
 
+        public static string Indicator { get; private set; }
+
         public string Name { get; set; }
         public string Value { get; set; }
 

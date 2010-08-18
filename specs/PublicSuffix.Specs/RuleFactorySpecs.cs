@@ -7,18 +7,24 @@ using Machine.Specifications;
 
 namespace PublicSuffix.Specs {
 
-    [Subject(typeof(RuleFactory))]
-    public class when_given_a_normal_rule_string {
-        It should_return_a_normal_rule_type = () => RuleFactory.Get("com").ShouldBe(typeof(NormalRule));
+    public abstract class WithFactory {
+        protected static RuleFactory factory;
+
+        Establish context = () => factory = new RuleFactory();
     }
 
     [Subject(typeof(RuleFactory))]
-    public class when_given_a_wildcard_rule_string {
-        It should_return_a_wildcard_rule_type = () => RuleFactory.Get("*.zw").ShouldBe(typeof(WildcardRule));
+    public class when_given_a_normal_rule_string : WithFactory {
+        It should_return_a_normal_rule_type = () => factory.FromLine("com").ShouldBe(typeof(NormalRule));
     }
 
     [Subject(typeof(RuleFactory))]
-    public class when_given_an_exception_rule_string {
-        It should_return_an_exception_rule_type = () => RuleFactory.Get("!metro.tokyo.jp").ShouldBe(typeof(ExceptionRule));
+    public class when_given_a_wildcard_rule_string : WithFactory {
+        It should_return_a_wildcard_rule_type = () => factory.FromLine("*.zw").ShouldBe(typeof(WildcardRule));
+    }
+
+    [Subject(typeof(RuleFactory))]
+    public class when_given_an_exception_rule_string : WithFactory {
+        It should_return_an_exception_rule_type = () => factory.FromLine("!metro.tokyo.jp").ShouldBe(typeof(ExceptionRule));
     }
 }
