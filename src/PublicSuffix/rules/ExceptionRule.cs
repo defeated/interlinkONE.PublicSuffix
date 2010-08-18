@@ -15,7 +15,7 @@ namespace PublicSuffix.Rules {
             var domain = new Domain() {
                 TLD         = string.Join(".", this.Parts.Reverse().Skip(1).ToArray()),
                 MainDomain  = this.Parts.Last(),
-                SubDomain   = string.Join(".", host.Skip(this.Length).ToArray())
+                SubDomain   = string.Join(".", host.Skip(this.Length).Reverse().ToArray())
             };
 
             return domain;

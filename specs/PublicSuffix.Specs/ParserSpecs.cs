@@ -76,12 +76,30 @@ namespace PublicSuffix.Specs {
     }
 
     [Subject(typeof(Parser))]
+    public class when_given_a_wildcard_url_with_multiple_tld_and_multiple_subdomains : WithParser {
+        Establish context = () => domain = parser.Parse("http://www.xyz.site.nonmetro.tokyo.jp");
+
+        It parses_the_tld = () => domain.TLD.ShouldEqual("nonmetro.tokyo.jp");
+        It parses_the_maindomain = () => domain.MainDomain.ShouldEqual("site");
+        It parses_the_subdomain = () => domain.SubDomain.ShouldEqual("www.xyz");
+    }
+
+    [Subject(typeof(Parser))]
     public class when_given_an_exception_url : WithParser {
         Establish context = () => domain = parser.Parse("http://www.metro.tokyo.jp");
 
         It parses_the_tld           = () => domain.TLD.ShouldEqual("tokyo.jp");
         It parses_the_maindomain    = () => domain.MainDomain.ShouldEqual("metro");
         It parses_the_subdomain     = () => domain.SubDomain.ShouldEqual("www");
+    }
+
+    [Subject(typeof(Parser))]
+    public class when_given_an_exception_url_with_multiple_subdomains : WithParser {
+        Establish context = () => domain = parser.Parse("http://www.site.metro.tokyo.jp");
+
+        It parses_the_tld = () => domain.TLD.ShouldEqual("tokyo.jp");
+        It parses_the_maindomain = () => domain.MainDomain.ShouldEqual("metro");
+        It parses_the_subdomain = () => domain.SubDomain.ShouldEqual("www.site");
     }
 
 }
