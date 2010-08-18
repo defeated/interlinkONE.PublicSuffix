@@ -43,11 +43,11 @@ namespace PublicSuffix {
                         ??
                         matches.OrderByDescending(r => r.Length).FirstOrDefault();
 
-            var domain = new Domain();
-            if (rule != null) {
-                domain = rule.Parse(url);
-                domain.IsValid = true;
-            }
+            var valid = (rule != null);
+            rule = rule ?? new WildcardRule("*");
+
+            var domain = rule.Parse(url);
+            domain.IsValid = valid;
 
             return domain;
         }
