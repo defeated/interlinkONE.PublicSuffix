@@ -42,12 +42,14 @@ namespace PublicSuffix {
             if(result != null) domain.IsValid = true;
 
             if(result is NormalRule) {
-                domain.TLD = result.Name;
-                domain.MainDomain = host.Skip(result.Length).First();
-                domain.SubDomain = string.Join(".", host.Skip(result.Length + 1).Reverse().ToArray());
+                domain.TLD          = string.Join(".", host.Take(result.Length).Reverse().ToArray());
+                domain.MainDomain   = host.Skip(result.Length).First();
+                domain.SubDomain    = string.Join(".", host.Skip(result.Length + 1).Reverse().ToArray());
             }
             if(result is WildcardRule) {
-                domain.TLD = host[result.Length - 1] + "." + string.Join(".", result.Parts.Where(part => part != "*").Reverse().ToArray());
+                domain.TLD          = string.Join(".", host.Take(result.Length).Reverse().ToArray());
+                domain.MainDomain   = host.Skip(result.Length).First();
+                domain.SubDomain    = string.Join(".", host.Skip(result.Length + 1).Reverse().ToArray());
             }
             if(result is ExceptionRule) {
                 domain.TLD          = string.Join(".", result.Parts.Reverse().Skip(1).ToArray());
