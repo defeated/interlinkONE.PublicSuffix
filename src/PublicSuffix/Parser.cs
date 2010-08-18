@@ -12,11 +12,7 @@ namespace PublicSuffix {
     /// inspecting a ist of <see cref="Rule"/>s from a <see cref="RulesList"/>.
     /// </summary>
     public class Parser {
-
-        /// <summary>
-        /// <see cref="Rule" /> instances.
-        /// </summary>
-        public Rule[] Rules { get; private set; }
+        private Rule[] Rules { get; set; }
 
         /// <summary>
         /// Parser requires an array of <see cref="Rule" />s to do its work.
@@ -27,7 +23,7 @@ namespace PublicSuffix {
         }
 
         /// <summary>
-        /// Uses the following algorithm:
+        /// Uses the following algorithm from http://publicsuffix.org/format/
         /// <list type="bullet">
         /// <item><description>Match domain against all rules and take note of the matching ones.</description></item>
         /// <item><description>If no rules match, the prevailing rule is "*".</description></item>
@@ -38,7 +34,7 @@ namespace PublicSuffix {
         /// <item><description>The registered domain is the public suffix plus one additional label.</description></item>
         /// </list>
         /// </summary>
-        /// <param name="url">A valid url. <example>http://www.google.com</example></param>
+        /// <param name="url">A valid url. example: http://www.google.com</param>
         /// <returns>A normalized <see cref="Domain" /> instance.</returns>
         public Domain Parse(string url) {
             var matches = this.Rules

@@ -14,8 +14,8 @@ namespace PublicSuffix {
     /// <item><description>Each line is only read up to the first whitespace; entire lines can also be commented using //.</description></item>
     /// <item><description>Each line which is not entirely whitespace or begins with a comment contains a rule.</description></item>
     /// </list>
+    /// See http://mxr.mozilla.org/mozilla-central/source/netwerk/dns/effective_tld_names.dat?raw=1 for the latest file.
     /// </summary>
-    /// <remarks>See http://mxr.mozilla.org/mozilla-central/source/netwerk/dns/effective_tld_names.dat?raw=1 for the latest file.</remarks>
     public class RulesList {
 
         /// <summary>
@@ -31,11 +31,6 @@ namespace PublicSuffix {
             return lines;
         }
 
-        /// <summary>
-        /// Check if the supplied rule is not null, empty ("") or a comment (starts with "//")
-        /// </summary>
-        /// <param name="rule">The line</param>
-        /// <returns>true if the rule is not empty or a comment; otherwise, false.</returns>
         private bool IsValidRule(string rule) {
             return !string.IsNullOrEmpty(rule) && !rule.StartsWith("//");
         }
