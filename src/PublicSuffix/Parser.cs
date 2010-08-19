@@ -39,7 +39,7 @@ namespace PublicSuffix {
                 .Where(r => r.IsMatch(url))
                 .ToList();
 
-            var rule =  matches.Where(r => r is ExceptionRule).FirstOrDefault()
+            var rule =  matches.FirstOrDefault(r => r is ExceptionRule)
                         ??
                         matches.OrderByDescending(r => r.Length).FirstOrDefault();
 
