@@ -67,7 +67,7 @@ namespace PublicSuffix {
             this.TLD        = parts[0];
             this.MainDomain = parts[1];
             this.SubDomain  = parts[2];
-            this.IsValid    = false;
+            this.IsValid    = true;
         }
 
         /// <summary>

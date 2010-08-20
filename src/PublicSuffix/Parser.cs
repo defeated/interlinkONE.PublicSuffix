@@ -41,15 +41,11 @@ namespace PublicSuffix {
 
             var rule =  matches.FirstOrDefault(r => r is ExceptionRule)
                         ??
-                        matches.OrderByDescending(r => r.Length).FirstOrDefault();
+                        matches.OrderByDescending(r => r.Length).FirstOrDefault()
+                        ??
+                        new DefaultRule();
 
-            var valid = (rule != null);
-            rule = rule ?? new WildcardRule("*");
-
-            var domain = rule.Parse(url);
-            domain.IsValid = valid;
-
-            return domain;
+            return rule.Parse(url);
         }
     }
 
