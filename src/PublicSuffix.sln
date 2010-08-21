@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EAF0D2AC-1F5A-4C33-8FCD-EBE6334A2BFC}"
 	ProjectSection(SolutionItems) = preProject
 		..\rakefile.rb = ..\rakefile.rb
+		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
 Global
