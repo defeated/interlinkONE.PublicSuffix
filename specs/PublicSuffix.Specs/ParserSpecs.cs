@@ -83,9 +83,10 @@ namespace PublicSuffix.Specs {
     public class when_given_a_wildcard_url : WithParser {
         Establish context = () => domain = parser.Parse("http://www.bbc.co.uk");
 
-        It parses_the_tld           = () => domain.TLD.ShouldEqual("co.uk");
-        It parses_the_maindomain    = () => domain.MainDomain.ShouldEqual("bbc");
-        It parses_the_subdomain     = () => domain.SubDomain.ShouldEqual("www");
+        It parses_the_tld               = () => domain.TLD.ShouldEqual("co.uk");
+        It parses_the_maindomain        = () => domain.MainDomain.ShouldEqual("bbc");
+        It parses_the_subdomain         = () => domain.SubDomain.ShouldEqual("www");
+        It parses_the_registered_domain = () => domain.RegisteredDomain.ShouldEqual("bbc.co.uk");
     }
 
     [Subject(typeof(Parser))]
@@ -110,9 +111,10 @@ namespace PublicSuffix.Specs {
     public class when_given_an_exception_url : WithParser {
         Establish context = () => domain = parser.Parse("http://www.metro.tokyo.jp");
 
-        It parses_the_tld           = () => domain.TLD.ShouldEqual("tokyo.jp");
-        It parses_the_maindomain    = () => domain.MainDomain.ShouldEqual("metro");
-        It parses_the_subdomain     = () => domain.SubDomain.ShouldEqual("www");
+        It parses_the_tld               = () => domain.TLD.ShouldEqual("tokyo.jp");
+        It parses_the_maindomain        = () => domain.MainDomain.ShouldEqual("metro");
+        It parses_the_subdomain         = () => domain.SubDomain.ShouldEqual("www");
+        It parses_the_registered_domain = () => domain.RegisteredDomain.ShouldEqual("metro.tokyo.jp");
     }
 
     [Subject(typeof(Parser))]

@@ -20,19 +20,21 @@ namespace PublicSuffix.Specs {
     public class when_given_a_maindomain : WithDomain {
         Establish context = () => domain = new Domain("com", "google");
 
-        It has_a_tld            = () => domain.TLD.ShouldEqual("com");
-        It has_a_domain         = () => domain.MainDomain.ShouldEqual("google");
-        It converts_to_a_string = () => domain.ToString().ShouldEqual("google.com");
+        It has_a_tld                = () => domain.TLD.ShouldEqual("com");
+        It has_a_domain             = () => domain.MainDomain.ShouldEqual("google");
+        It has_a_registered_domain  = () => domain.RegisteredDomain.ShouldEqual("google.com");
+        It converts_to_a_string     = () => domain.ToString().ShouldEqual("google.com");
     }
 
     [Subject(typeof(Domain))]
     public class when_given_a_subdomain : WithDomain {
         Establish context = () => domain = new Domain("com", "google", "maps");
 
-        It has_a_tld            = () => domain.TLD.ShouldEqual("com");
-        It has_a_domain         = () => domain.MainDomain.ShouldEqual("google");
-        It has_a_subdomain      = () => domain.SubDomain.ShouldEqual("maps");
-        It converts_to_a_string = () => domain.ToString().ShouldEqual("maps.google.com");
+        It has_a_tld                = () => domain.TLD.ShouldEqual("com");
+        It has_a_domain             = () => domain.MainDomain.ShouldEqual("google");
+        It has_a_subdomain          = () => domain.SubDomain.ShouldEqual("maps");
+        It has_a_registered_domain  = () => domain.RegisteredDomain.ShouldEqual("google.com");
+        It converts_to_a_string     = () => domain.ToString().ShouldEqual("maps.google.com");
     }
 
     [Subject(typeof(Domain))]

@@ -31,6 +31,15 @@ namespace PublicSuffix {
         public bool IsValid { get; set; }
 
         /// <summary>
+        /// The Main Domain and the TLD in dot notation, example: google.com
+        /// </summary>
+        public string RegisteredDomain {
+            get {
+                return this.MainDomain + "." + this.TLD;
+            }
+        }
+
+        /// <summary>
         /// A new, empty <see cref="Domain" /> instance.
         /// </summary>
         public Domain() : this("") {}
